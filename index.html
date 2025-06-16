@@ -55,7 +55,6 @@
               <textarea class="form-control" name="referrer" placeholder=""></textarea>
             </div>
           </div>
-
           <!-- 右側 3/4 -->
           <div class="col-md-9">
             <!-- 問題 1 -->
@@ -74,7 +73,6 @@
                 </div>
               </div>
             </div>
-
             <!-- 問題 2 -->
             <div class="mb-4">
               <label class="form-label fw-bold">2. 以下步驟中分別遇到的問題是？(可複選)</label>
@@ -91,7 +89,6 @@
                   <div class="form-check"><input class="form-check-input" type="checkbox" id="base5" name="base_problems[]" value="底妝-問題5"><label class="form-check-label" for="base5">問題5</label></div>
                 </div>
               </div>
-
               <p class="mb-1">修容</p>
               <div class="row">
                 <div class="col-md-6">
@@ -105,7 +102,6 @@
                 </div>
               </div>
             </div>
-
             <!-- 問題 3 -->
             <div class="mb-4">
               <label class="form-label fw-bold">3. 選擇來美妝學習的原因是？(可複選)</label>
@@ -119,7 +115,6 @@
             </div>
           </div>
         </div>
-
         <div class="text-end mt-4">
           <button type="submit" class="btn btn-primary px-4 py-2">提交問卷</button>
         </div>
@@ -127,18 +122,35 @@
     </div>
   </div>
 </div>
-
 <script>
   document.getElementById("beautyForm").addEventListener("submit", async function (e) {
     e.preventDefault();
 
+    // ✅ 驗證開始
+    const isMakeupChecked = hasAtLeastOneChecked("makeup_problem[]");
+    const isBaseChecked = hasAtLeastOneChecked("base_problems[]");
+    const isContourChecked = hasAtLeastOneChecked("contour_problems[]");
+    const isReasonChecked = hasAtLeastOneChecked("learning_reasons[]");
+    if (!isMakeupChecked && !isBaseChecked && !isContourChecked && !isReasonChecked) {
+      Swal.fire({
+        icon: "warning",
+        title: "請填寫至少一個問題",
+        text: "除了風格與介紹人外，請至少選擇一個複選欄位！"
+      });
+      return;
+    }
+    // ✅ 驗證函式
+    function hasAtLeastOneChecked(name) {
+      return [...document.querySelectorAll(`input[name="${name}"]`)].some(input => input.checked);
+    }
+
+    // ✅ 實際送出邏輯
     const form = e.target;
     const formData = new FormData(form);
     const params = new URLSearchParams();
     for (const [key, value] of formData.entries()) {
       params.append(key, value);
     }
-
     Swal.fire({
       title: "提交中...",
       text: "請稍候",
@@ -146,23 +158,18 @@
       allowEscapeKey: false,
       didOpen: () => Swal.showLoading()
     });
-
     try {
       const response = await fetch("https://script.google.com/macros/s/AKfycbxH88v0wj7RioZAToyp98e7MJwxU8i-26gryisFr-pmrqNm8csOAOwYPs596feL1bwV/exec", {
         method: "POST",
         body: params,
       });
-
       const data = await response.json();
-
       Swal.fire({
         title: data.status === "success" ? "送出成功" : "錯誤",
         text: data.message,
         icon: data.status === "success" ? "success" : "error",
       });
-
       if (data.status === "success") form.reset();
-
     } catch (error) {
       Swal.fire({
         title: "送出失敗",
