@@ -131,7 +131,7 @@
     const isBaseChecked = hasAtLeastOneChecked("base_problems[]");
     const isContourChecked = hasAtLeastOneChecked("contour_problems[]");
     const isReasonChecked = hasAtLeastOneChecked("learning_reasons[]");
-    if (!isMakeupChecked && !isBaseChecked && !isContourChecked && !isReasonChecked) {
+    if (!isMakeupChecked || !isBaseChecked || !isContourChecked || !isReasonChecked) {
       Swal.fire({
         icon: "warning",
         title: "請填寫至少一個問題",
