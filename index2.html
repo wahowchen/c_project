@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="網站設計、網頁開發服務。提供高品質、響應式、效能優化的網頁解決方案。">
+    <meta property="og:title" content="您的網站名稱">
+    <meta property="og:description" content="網站設計、網頁開發服務。提供高品質、響應式、效能優化的網頁解決方案。">
+    <meta property="og:image" content="https://example.com/images/og-image.jpg">
+    <meta property="og:url" content="https://example.com">
+    <title>您的網站名稱</title>
+    <link rel="icon" href="https://example.com/favicon.ico" sizes="any">
+    <link rel="icon" href="https://example.com/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="https://example.com/apple-touch-icon.png">
+    <style>
+        /*
+        * Reset & Base Styles
+        */
+        :root {
+            /* 主色系 */
+            --primary-orange: #FF9800;
+            --dark-orange: #E65100;
+            --light-orange: #FFC107;
+            /* 中性色 */
+            --dark-blackish: #212121;
+            --dark-gray: #333333;
+            --medium-gray: #616161;
+            --light-gray: #E0E0E0;
+            --extra-light-gray: #F5F5F5;
+            /* 特殊色 */
+            --menu-bg-mobile: rgba(33, 33, 33, 0.9);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--extra-light-gray);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-orange);
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--light-orange);
+        }
+
+        /*
+        * Typography
+        */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--dark-blackish);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+        }
+
+        h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.75rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3.5vw, 2.5rem); }
+
+        p {
+            margin-bottom: 1em;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2rem);
+        }
+
+        /*
+        * site-header
+        */
+        .site-header {
+            width: 100%;
+            background-color: var(--dark-blackish);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-logo a {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-img {
+            width: clamp(2rem, 5vw, 3rem);
+            height: auto;
+        }
+        
+        .header-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+        }
+        
+        .header-text {
+            display: none;
+        }
+        
+        .header-buttons {
+            display: none;
+            gap: 1rem;
+        }
+        
+        .header-button {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-button:hover {
+            background-color: var(--dark-orange);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .header-actions a {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .header-toggle {
+            display: flex;
+        }
+        
+        .header-toggle button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 1;
+        }
+        
+        /*
+        * site-main
+        */
+        .site-main {
+            padding: 2rem 0;
+        }
+
+        /*
+        * site-footer
+        */
+        .site-footer {
+            background-color: var(--dark-blackish);
+            color: var(--light-gray);
+            padding: 2rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .footer-social, .footer-connect, .footer-notice {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-social a, .footer-connect a {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--light-gray);
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover, .footer-connect a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .footer-connect li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-notice {
+            margin-top: 1rem;
+            text-align: center;
+            border-top: 1px solid var(--medium-gray);
+            padding-top: 1rem;
+        }
+
+        /*
+        * Responsive Breakpoints
+        */
+
+        /* XS: max-width: 360px */
+        @media (max-width: 360px) {
+            .header-img { width: 2rem; }
+            .header-title { font-size: 1.25rem; }
+            .header-actions { gap: 0.5rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .footer-notice { margin-top: 1rem; }
+        }
+
+        /* S: min-width: 361px */
+        @media (min-width: 361px) and (max-width: 600px) {
+            .header-img { width: 2.5rem; }
+            .header-title { font-size: 1.5rem; }
+            .header-actions { gap: 0.75rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        /* M: min-width: 601px */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .header-text { display: block; }
+            .header-toggle { display: none; }
+            .header-buttons { display: flex; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-social { grid-column: 1 / -1; }
+        }
+
+        /* L: min-width: 1025px */
+        @media (min-width: 1025px) and (max-width: 1440px) {
+            .header-text { display: block; }
+            .header-toggle { display: none; }
+            .header-buttons { display: flex; }
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+            .footer-social { grid-column: 1; }
+        }
+
+        /* XL: min-width: 1441px */
+        @media (min-width: 1441px) {
+            .header-text { display: block; }
+            .header-toggle { display: none; }
+            .header-buttons { display: flex; }
+            .footer-grid { grid-template-columns: 2fr 1fr 1fr; }
+            .footer-social { grid-column: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header" role="banner">
+        <div class="container header-content">
+            <div class="header-logo">
+                <a href="/" aria-label="回到首頁">
+                    <img src="https://example.com/images/logo.svg" alt="網站商標" class="header-img">
+                    <span class="header-title">網站名稱</span>
+                    <span class="header-text">您的標語或服務介紹</span>
+                </a>
+            </div>
+            
+            <nav class="header-buttons" role="navigation" aria-label="主導覽列">
+                <a href="#services" class="header-button">服務</a>
+                <a href="#portfolio" class="header-button">作品集</a>
+                <a href="#contact" class="header-button">聯絡我們</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" class="header-action-user" aria-label="會員中心">👤</a>
+                <a href="#" class="header-action-shopcart" aria-label="購物車">🛒</a>
+                <a href="#" class="header-action-info" aria-label="通知中心">🔔</a>
+            </div>
+            
+            <div class="header-toggle">
+                <button class="header-button-open" aria-controls="mobile-menu" aria-expanded="false">☰</button>
+                <button class="header-button-close" aria-controls="mobile-menu" aria-expanded="true" style="display: none;">✕</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="site-main" id="main-content" role="main">
+        <section class="container">
+            <h1>頁面主標題</h1>
+            <p>網站內容主要區塊，這裡會放置文章、服務介紹、產品列表等內容。</p>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-grid">
+            <div class="footer-social">
+                <h3>社群媒體</h3>
+                <div role="group" aria-label="社群媒體連結">
+                    <a href="#" class="social-ig" aria-label="Instagram">IG</a>
+                    <a href="#" class="social-fb" aria-label="Facebook">FB</a>
+                    <a href="#" class="social-line" aria-label="Line">LINE</a>
+                    <a href="#" class="social-x" aria-label="X">X</a>
+                </div>
+            </div>
+
+            <div class="footer-connect">
+                <h3>聯絡我們</h3>
+                <ul>
+                    <li class="connect-tel">電話：<a href="tel:+886-00-1234567">00-1234567</a></li>
+                    <li class="connect-email">信箱：<a href="mailto:info@example.com">info@example.com</a></li>
+                    <li class="connect-business-hours">營業時間：週一至週五 9:00-18:00</li>
+                    <li class="connect-address">地址：<a href="#" target="_blank" rel="noopener noreferrer">台北市信義區</a></li>
+                </ul>
+                <div class="connect-google-map">
+                    <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Google 地圖位置">地圖連結</a>
+                </div>
+            </div>
+
+            <div class="footer-notice">
+                <p class="notice-copyright">Copyright © 2025 您的公司名稱. All Rights Reserved.</p>
+                <div class="notice-entity">
+                    <p class="entity-title">公司資訊</p>
+                    <p class="entity-taxnumber">統一編號：XXXXXXXX</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.querySelector('.header-button-open');
+            const closeBtn = document.querySelector('.header-button-close');
+            const mobileMenu = document.querySelector('.header-buttons');
+
+            openBtn.addEventListener('click', () => {
+                mobileMenu.style.display = 'flex';
+                openBtn.style.display = 'none';
+                closeBtn.style.display = 'block';
+                openBtn.setAttribute('aria-expanded', 'true');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                mobileMenu.style.display = 'none';
+                openBtn.style.display = 'block';
+                closeBtn.style.display = 'none';
+                openBtn.setAttribute('aria-expanded', 'false');
+            });
+            
+            // 處理螢幕尺寸變化時的選單顯示
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 600) {
+                    mobileMenu.style.display = ''; // 恢復 CSS 預設樣式
+                    openBtn.style.display = 'none';
+                    closeBtn.style.display = 'none';
+                } else {
+                    mobileMenu.style.display = 'none';
+                    openBtn.style.display = 'block';
+                    closeBtn.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
